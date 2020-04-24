@@ -1,537 +1,326 @@
--- MySQL Administrator dump 1.4
--- Copyright: Kanika Sood
--- Redistribution of sql dump/assignment not allowed without above author's consent
--- ------------------------------------------------------
--- Server version	5.0.45-community-nt
 
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
--- /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO,MYSQL323' */;
--- 
+CREATE DATABASE IF NOT EXISTS DocOffice;
+USE DocOffice;
 
 --
--- Create schema bighitvideo
+-- Definition of table `person`
 --
 
-CREATE DATABASE IF NOT EXISTS bighitvideo;
-USE bighitvideo;
-
---
--- Definition of table `customer`
---
-
-DROP TABLE IF EXISTS `customer`;
-CREATE TABLE `customer` (
-  `accountId` int(10) NOT NULL,
-  `lastName` varchar(50) default NULL,
-  `firstName` varchar(50) default NULL,
-  `street` varchar(50) default NULL,
+DROP TABLE IF EXISTS `person`;
+CREATE TABLE `person` (
+  `PersonID` int(10) NOT NULL,
+  `LastName` varchar(50) default NULL,
+  `FirstName` varchar(50) default NULL,
+  `StreetAddress` varchar(50) default NULL,
   `city` varchar(50) default NULL,
   `state` varchar(2) default NULL,
-  `zipcode` varchar(9) default NULL,
-  `balance` decimal(19,4) default NULL,
-  PRIMARY KEY  (`accountId`),
-  KEY `accountId` (`accountId`),
-  KEY `zipcode` (`zipcode`)
+  `zip` varchar(9) default NULL,
+  `PhoneNumber` varchar(10) default NULL,
+  `SSN` varchar(10) default NULL,
+
+/* ---------------------------------------- */
+  PRIMARY KEY  (`PersonID`),
+  KEY `PersonID` (`PersonID`),
+  KEY `PhoneNumber` (`PhoneNumber`)
 ) ENGINE=InnoDB;
 
 --
--- Dumping data for table `customer`
+-- Dumping data for table `person`
 --
 
-/*!40000 ALTER TABLE `customer` DISABLE KEYS */;
-INSERT INTO `customer` (`accountId`,`lastName`,`firstName`,`street`,`city`,`state`,`zipcode`,`balance`) VALUES 
- (101,'Block','Jane','345 Randolph Circle','Apopka','FL','30458','0.0000'),
- (102,'Hamilton','Cherry','3230 Dade St.','Dade City','FL','30555','3.4700'),
- (103,'Harrison','Katherine','103 Landis Hall','Bratt','FL','30457','30.5700'),
- (104,'Breaux','Carroll','76 Main St.','Apopka','FL','30458','34.5800'),
- (106,'Morehouse','Anita','9501 Lafayette St.','Houma','LA','44099','0.0000'),
- (111,'Doe','Jane','123 Main St.','Apopka','FL','30458','0.0000'),
- (201,'Greaves','Joseph','14325 N. Bankside St.','Godfrey','IL','43580','0.0000'),
- (444,'Doe','Jane','Cawthon Dorm, room 642','Tallahassee','FL','32306','0.0000'),
- (445,'Riccardi','Greg','101 Thanet St.','London','FL','33333','0.0000'),
- (446,'Riccardi','Greg','101 Thanet St.','London','FL','33333','0.0000'),
- (447,'Riccardi','Greg','101 Thanet St.','London','FL','33333','0.0000'),
- (448,'Mylopoulos','Janet','4402 Elm St.','Apopka','FL','33455','0.0000'),
- (449,'Mylopoulos','Janet','4402 Elm St.','Apopka','FL','33455','0.0000'),
- (450,'Mylopoulos','Janet','4402 Elm St.','Apopka','FL','33455','0.0000'),
- (451,'O\'Connell','Janet','4402 Elm St.','Apopka','FL','33455','0.0000'),
- (452,'O\'Connell','Janet','4402 Elm St.','Apopka','FL','33455','0.0000');
-/*!40000 ALTER TABLE `customer` ENABLE KEYS */;
+/*!40000 ALTER TABLE `person` DISABLE KEYS */;
+INSERT INTO `person` (`PersonID`,`LastName`,`FirstName`,`StreetAddress`,`city`,`state`,`zip`,`PhoneNumber`, 'SSN') VALUES
+111,'Apple','Amanda','345 Randolph Circle','Apopka','CA','30458','7141147258',’111222333’),
+(222,'Berry','Beatrice','3230 Dade St.','Dade City','FL','30555','3.4700',’7141852963’,’222333444’),
+(333,'Celery','Cecilia','103 Landis Hall','Bratt','CA','30457','7141123456’,’333444555’'),
+(444,'Duck','Donald','76 Main St.','Apopka','CA','30458','7141456789',’444555666’),
+(555,'Eggs','Erin','9501 Lafayette St.','Houma','CA','44099','7147894563',’555666777’),
+(666,'Fajita','Fabian','123 Main St.','Apopka','CA','30458','7141334679',’666777888’),
+(777,'Garden','Gail','14325 N. Bankside St.','Godfrey','CA','43580','7142225579',’777888999’),
+(888,'Ham','Holly','Cawthon Dorm, room 642','Tallahassee','FL','32306','7145554499’,'888999000’),
+(999,'Ice','Izzy','101 Thanet St.','London','CA','33333','7147779456',’123456789’),
+(101,'Jam','Joseph','101 Thanet St.','London','CA','33333','7143334169',’987654321’);
+
+
+/*!40000 ALTER TABLE `person` ENABLE KEYS */;
 
 
 --
--- Definition of table `employee`
+-- Definition of table `patient`
 --
 
-DROP TABLE IF EXISTS `employee`;
-CREATE TABLE `employee` (
-  `ssn` varchar(50) NOT NULL,
-  `lastName` varchar(50) default NULL,
-  `firstName` varchar(50) default NULL,
-  PRIMARY KEY  (`ssn`)
+DROP TABLE IF EXISTS `patient`;
+CREATE TABLE `patient` (
+  `PatientID` int(10) NOT NULL,
+  `PhoneNumber` varchar(50) default NULL,
+  `DOB` date() default NULL,
+  `PersonID` int(10) NOT NULL,
+
+  PRIMARY KEY  (`PatientID`)
+  KEY `PhoneNumber` (`PhoneNumber`)
+  KEY `PersonID` (`PersonID`)
+  KEY `PatientID` (`PatientID`)
+
+
 ) ENGINE=InnoDB;
 
 --
--- Dumping data for table `employee`
+-- Dumping data for table `patient`
 --
 
-/*!40000 ALTER TABLE `employee` DISABLE KEYS */;
-INSERT INTO `employee` (`ssn`,`lastName`,`firstName`) VALUES 
- ('145-09-0967','Uno','Jane'),
- ('245-11-4554','Toulouse','Jie'),
- ('376-77-0099','Threat','Ayisha'),
- ('479-98-0098','Fortune','Julian'),
- ('579-98-8778','Fivozinsky','Bruce');
+/*!40000 ALTER TABLE `patient` DISABLE KEYS */;
+INSERT INTO `patient` (`PatientID`,`PhoneNumber`,`DOB`,`PersonID`) VALUES
+(101,'7141147258','05-03-1992',111),
+(102,'7141852963','01-12-1990',222),
+(103,'7147894563','12-24-1985',555),
+(114,'7143334169','06-06-1997',101),
+(115,'7145554499','02-29-1990',888);
+
 /*!40000 ALTER TABLE `employee` ENABLE KEYS */;
 
 
 --
--- Definition of table `hourlyemployee`
+-- Definition of table `doctor`
 --
 
-DROP TABLE IF EXISTS `hourlyemployee`;
-CREATE TABLE `hourlyemployee` (
-  `ssn` varchar(50) NOT NULL,
-  `hourlyRate` decimal(19,4) default NULL,
-  PRIMARY KEY  (`ssn`),
-  UNIQUE KEY `{CC921662-F1CE-40BD-B451-CD5052` (`ssn`)
+DROP TABLE IF EXISTS `doctor`;
+CREATE TABLE `doctor` (
+  `DoctorID` int(10) NOT NULL,
+  `MedicalDegrees` varchar(60) default NULL,
+  `PersonID` int(10) default NOT NULL,
+
+  PRIMARY KEY  (`DoctorID`),
+  KEY `DoctorID` (`DoctorID`)
+  KEY `PersonID` (`PersonID`)
+
+  /*UNIQUE KEY `{CC921662-F1CE-40BD-B451-CD5052` (`ssn`)*/
 ) ENGINE=InnoDB;
 
 --
--- Dumping data for table `hourlyemployee`
+-- Dumping data for table `doctor`
 --
 
-/*!40000 ALTER TABLE `hourlyemployee` DISABLE KEYS */;
-INSERT INTO `hourlyemployee` (`ssn`,`hourlyRate`) VALUES 
- ('145-09-0967','6.0500'),
- ('245-11-4554','5.5000'),
- ('376-77-0099','10.7500'),
- ('479-98-0098','9.5000'),
- ('579-98-8778','5.5000');
-/*!40000 ALTER TABLE `hourlyemployee` ENABLE KEYS */;
+/*!40000 ALTER TABLE `doctor` DISABLE KEYS */;
+INSERT INTO `doctor` (`DoctorID`,`MedicalDegrees`,`PersonID`) VALUES
+(202, 'M.D.' , 888),
+(204, 'M.D.', 555),
+(206, 'M.D.', 222);
+
+/*!40000 ALTER TABLE `doctor` ENABLE KEYS */;
 
 
 --
--- Definition of table `movie`
+-- Definition of table `PatientVisit`
 --
 
-DROP TABLE IF EXISTS `movie`;
-CREATE TABLE `movie` (
-  `movieId` int(10) NOT NULL,
-  `title` varchar(50) default NULL,
-  `genre` varchar(50) default NULL,
-  `length` int(10) default NULL,
-  `rating` varchar(50) default NULL,
-  PRIMARY KEY  (`movieId`),
-  KEY `movieId` (`movieId`)
+DROP TABLE IF EXISTS `patientVisit`;
+CREATE TABLE `patientVisit` (
+  `VisitID` int(10) NOT NULL,
+  `PatientID` int(10) NOT NULL,
+  `DoctorID` int(10) NOT NULL,
+  `VisitDate` int(10) default NULL,
+  `DocNote` text(50) default NULL,
+
+  PRIMARY KEY  (`VisitID`),
+  KEY `PatientID` (`PatientID`)
+  KEY `DoctorID` (`DoctorID`)
 ) ENGINE=InnoDB;
 
 --
--- Dumping data for table `movie`
+-- Dumping data for table `PatientVisit`
 --
 
-/*!40000 ALTER TABLE `movie` DISABLE KEYS */;
-INSERT INTO `movie` (`movieId`,`title`,`genre`,`length`,`rating`) VALUES 
- (101,'The Thirty-Nine Steps','mystery',101,'R'),
- (123,'Annie Hall','romantic comedy',110,'R'),
- (145,'Lady and the Tramp','animated comedy',93,'PG'),
- (189,'Animal House','comedy',87,'PG-13'),
- (450,'Elizabeth','costume drama',123,'PG-13'),
- (553,'Stagecoach','western',130,'R'),
- (987,'Duck Soup','comedy',99,'PG-13');
+/*!40000 ALTER TABLE `patientVisit` DISABLE KEYS */;
+INSERT INTO `patientVisit` (`VisitID`,`PatientID`,`DoctorID`,`VisitDate`,`DocNote`) VALUES
+(111, 101, 202, '04-24-2020', 'Drink pills every 12 hours'),
+(222, 102, 202, '04-23-2020', 'We try our best…' ),
+(333, 103, 204, '02-25-2019', 'Please excuse him from school'),
+(444, 114, 204, '01-31-2020', 'Stay in the hospital for another week'),
+(555, 115, 206, '03-15-2020', 'Drink pills every 6 hours');
+
 /*!40000 ALTER TABLE `movie` ENABLE KEYS */;
 
 
 --
--- Definition of table `otherusers`
+-- Definition of table `Speciality`
 --
 
-DROP TABLE IF EXISTS `otherusers`;
-CREATE TABLE `otherusers` (
-  `accountId` int(10) NOT NULL,
-  `name` varchar(50) NOT NULL,
-  PRIMARY KEY  (`accountId`,`name`),
+DROP TABLE IF EXISTS `speciality`;
+CREATE TABLE `speciality` (
+  `SpecialityID` int(10) NOT NULL,
+  `SpecialityName` varchar(50) NOT NULL,
+  PRIMARY KEY  (`SpecialityID`,`SpecialityName`),
+  KEY `SpecialityID` (`SpecialityID`)
+
+  /*
   KEY `{CE5D3D35-8BD6-4174-B922-FDEE2B` (`accountId`),
-  KEY `accountId` (`accountId`)
+  KEY `accountId` (`accountId`) */
+
 ) ENGINE=InnoDB;
 
 --
 -- Dumping data for table `otherusers`
 --
 
-/*!40000 ALTER TABLE `otherusers` DISABLE KEYS */;
-INSERT INTO `otherusers` (`accountId`,`name`) VALUES 
- (101,'Greg Jones'),
- (101,'Joe Block'),
- (104,'Cyrus Lambeaux'),
- (104,'Jean Deaux'),
- (104,'Judy Breaux');
+/*!40000 ALTER TABLE `Speciality` DISABLE KEYS */;
+INSERT INTO `speciality` (`SpecialityID`,`SpecialityName`) VALUES
+(234, 'Diagnostic Imaging'),
+(509, 'Physical and Visual Examination' ),
+(576, 'Cellular & Chemical Analysis');
+
 /*!40000 ALTER TABLE `otherusers` ENABLE KEYS */;
 
 
 --
--- Definition of table `paystatement`
+-- Definition of table `DoctorSpeciality`
 --
 
-DROP TABLE IF EXISTS `paystatement`;
-CREATE TABLE `paystatement` (
-  `ssn` varchar(50) NOT NULL,
-  `hourlyRate` decimal(19,4) default NULL,
-  `numHours` int(10) default NULL,
-  `amountPaid` decimal(19,4) default NULL,
-  `datePaid` datetime NOT NULL,
-  PRIMARY KEY  (`ssn`,`datePaid`),
-  KEY `amountPaid` (`amountPaid`),
-  KEY `numHours` (`numHours`),
-  KEY `PayStatementssn` (`ssn`)
-) ENGINE=InnoDB;
+DROP TABLE IF EXISTS `doctorSpeciality`;
+CREATE TABLE `doctorSpeciality` (
+  `DoctorID` int(10) NOT NULL,
+  `SpecialityID` int(10) NOT NULL,
+
+  PRIMARY KEY  (`DoctorID`,`SpecialityID`),
+  KEY `DoctorID` (`DoctorID`),
+  KEY `SpecialityID` (`SpecialityID`),
+  ) ENGINE=InnoDB;
 
 --
--- Dumping data for table `paystatement`
+-- Dumping data for table `doctorSpeciality`
 --
 
-/*!40000 ALTER TABLE `paystatement` DISABLE KEYS */;
-INSERT INTO `paystatement` (`ssn`,`hourlyRate`,`numHours`,`amountPaid`,`datePaid`) VALUES 
- ('145-09-0967','6.0500',8,'45.3750','1999-05-17 00:00:00'),
- ('245-11-4554','5.5000',4,'20.6250','1999-05-17 00:00:00'),
- ('376-77-0099','10.7500',16,'172.0000','1999-05-17 00:00:00');
+/*!40000 ALTER TABLE `DoctorSpeciality` DISABLE KEYS */;
+INSERT INTO `doctorSpeciality` (`DoctorID`,`SpecialityID`) VALUES
+(202, 234),
+(204, 509),
+(206, 576);
 /*!40000 ALTER TABLE `paystatement` ENABLE KEYS */;
 
 
 --
--- Definition of table `previousrental`
+-- Definition of table `PVisitPrescription`
 --
 
-DROP TABLE IF EXISTS `previousrental`;
-CREATE TABLE `previousrental` (
-  `accountId` int(10) NOT NULL,
-  `videoId` int(10) NOT NULL,
-  `dateRented` datetime NOT NULL,
-  `dateReturned` datetime default NULL,
-  `cost` decimal(19,4) default NULL,
-  PRIMARY KEY  (`accountId`,`videoId`,`dateRented`),
+DROP TABLE IF EXISTS `PVisitPrescription`;
+CREATE TABLE `PVisitPrescription` (
+  `VisitID` int(10) NOT NULL,
+  `PrescriptionID` int(10) NOT NULL,
+
+  PRIMARY KEY  (`VisitID`,`PrescriptionID`),
+/*
   KEY `{EC9DB354-14CF-4055-8C03-FEBD3C` (`accountId`),
-  KEY `{F8FB5EF8-A80D-401A-9DD2-E9FF64` (`videoId`),
-  KEY `accountId` (`accountId`),
-  KEY `videoId` (`videoId`)
+  KEY `{F8FB5EF8-A80D-401A-9DD2-E9FF64` (`videoId`), */
+  KEY `VisitID` (`VisitID`),
+  KEY `PrescriptionID` (`PrescriptionID`)
+
 ) ENGINE=InnoDB;
 
 --
--- Dumping data for table `previousrental`
+-- Dumping data for table `PVisitPrescription`
 --
 
-/*!40000 ALTER TABLE `previousrental` DISABLE KEYS */;
-INSERT INTO `previousrental` (`accountId`,`videoId`,`dateRented`,`dateReturned`,`cost`) VALUES 
- (101,101,'2001-12-09 00:00:00','2001-12-10 00:00:00','2.4900'),
- (101,112,'2001-01-13 00:00:00','2001-01-04 00:00:00','1.9900'),
- (101,113,'2002-01-15 00:00:00','2002-01-15 00:00:00','0.9900'),
- (102,113,'2001-12-01 00:00:00','2001-12-03 00:00:00','2.4900'),
- (111,101,'2001-12-04 00:00:00','2001-12-06 00:00:00','2.4900'),
- (111,99787,'2002-01-01 00:00:00','2002-01-04 00:00:00','3.9500'),
- (201,113,'2001-12-09 00:00:00','2001-12-14 00:00:00','3.9900'),
- (201,77564,'2002-01-14 00:00:00','2002-01-24 00:00:00','3.3500');
+/*!40000 ALTER TABLE `PVisitPrescription` DISABLE KEYS */;
+INSERT INTO `PVisitPrescription` (`VisitID`,`PrescriptionID`) VALUES
+(123, 901),
+(234, 902),
+(345, 903),
+(456, 904),
+(567, 905);
+
 /*!40000 ALTER TABLE `previousrental` ENABLE KEYS */;
 
 
 --
--- Definition of table `purchaseorder`
+-- Definition of table `prescription`
 --
 
-DROP TABLE IF EXISTS `purchaseorder`;
-CREATE TABLE `purchaseorder` (
-  `purchaseOrderId` int(10) NOT NULL,
-  `supplierId` varchar(50) default NULL,
-  `date` datetime default NULL,
-  `total` decimal(19,4) default NULL,
-  PRIMARY KEY  (`purchaseOrderId`),
-  KEY `{B2E00A44-11D2-446B-8500-570CDC` (`supplierId`),
-  KEY `purchaseOrderId` (`purchaseOrderId`),
-  KEY `supplierId` (`supplierId`)
+DROP TABLE IF EXISTS `prescription`;
+CREATE TABLE `prescription` (
+  `PrescriptionID` int(10) NOT NULL,
+  `PrescriptionName` varchar(50) default NULL,
+
+  PRIMARY KEY  (`PrescriptionID`),
+  /*KEY `{B2E00A44-11D2-446B-8500-570CDC` (`supplierId`), */
+  KEY `PrescriptionID` (`PrescriptionID`),
+
 ) ENGINE=InnoDB;
 
 --
--- Dumping data for table `purchaseorder`
+-- Dumping data for table `prescription`
 --
 
-/*!40000 ALTER TABLE `purchaseorder` DISABLE KEYS */;
-INSERT INTO `purchaseorder` (`purchaseOrderId`,`supplierId`,`date`,`total`) VALUES 
- (99001,'101101','1999-01-15 00:00:00','100.0000');
+/*!40000 ALTER TABLE `prescription` DISABLE KEYS */;
+INSERT INTO `prescription` (`PrescriptionID`,`PrescriptionName`) VALUES
+(901, 'Doxycycline'),
+(902, 'Ibuprofen'),
+(903, 'Metoprolol'),
+(904, 'Ciprofloxacin'),
+(905, 'Lyrica');
+
 /*!40000 ALTER TABLE `purchaseorder` ENABLE KEYS */;
 
 
 --
--- Definition of table `purchaseorderdetail`
+-- Definition of table `PVisitTest`
 --
 
-DROP TABLE IF EXISTS `purchaseorderdetail`;
-CREATE TABLE `purchaseorderdetail` (
-  `purchaseOrderId` int(10) NOT NULL,
-  `movieId` int(10) NOT NULL,
-  `quantity` int(10) default NULL,
-  `price` decimal(19,4) default NULL,
-  PRIMARY KEY  (`purchaseOrderId`,`movieId`),
-  KEY `{72967CAA-B6BB-44C4-B6F9-718C51` (`purchaseOrderId`),
-  KEY `{F17E7BC1-43A2-4E07-A035-CB448E` (`movieId`),
-  KEY `purchaseOrderId` (`purchaseOrderId`),
-  KEY `videoId` (`movieId`)
+DROP TABLE IF EXISTS `PVisitTest`;
+CREATE TABLE `PVisitTest` (
+  `VisitID` int(10) NOT NULL,
+  `TestID` int(10) NOT NULL,
+  PRIMARY KEY  (`VisitID`,`TestID`),
+
+  /*KEY `{72967CAA-B6BB-44C4-B6F9-718C51` (`purchaseOrderId`),
+  KEY `{F17E7BC1-43A2-4E07-A035-CB448E` (`movieId`),*/
+  KEY `VisitID` (`VisitID`),
+  KEY `TestID` (`TestID`)
 ) ENGINE=InnoDB;
 
 --
--- Dumping data for table `purchaseorderdetail`
+-- Dumping data for table `PVisitTest`
 --
 
-/*!40000 ALTER TABLE `purchaseorderdetail` DISABLE KEYS */;
-INSERT INTO `purchaseorderdetail` (`purchaseOrderId`,`movieId`,`quantity`,`price`) VALUES 
+/*!40000 ALTER TABLE `PVisitTest` DISABLE KEYS */;
+INSERT INTO `PVisitTest` (`VisitID`,`TestID`) VALUES
  (99001,450,3,'25.0000'),
  (99001,987,1,'25.0000');
-/*!40000 ALTER TABLE `purchaseorderdetail` ENABLE KEYS */;
+/*!40000 ALTER TABLE `PVisitTest` ENABLE KEYS */;
 
 
 --
--- Definition of table `rental`
+-- Definition of table `test`
 --
 
-DROP TABLE IF EXISTS `rental`;
-CREATE TABLE `rental` (
-  `accountId` int(10) default NULL,
-  `videoId` int(10) NOT NULL,
-  `dateRented` datetime default NULL,
-  `dateDue` datetime default NULL,
-  `cost` decimal(19,4) default NULL,
-  PRIMARY KEY  (`videoId`),
-  UNIQUE KEY `{0CF92969-0A44-4FD2-BA9B-B234C1` (`videoId`),
+DROP TABLE IF EXISTS `test`;
+CREATE TABLE `test` (
+  `TestID` int(10) default NULL,
+  `TestName` varchar(10) NOT NULL,
+
+  PRIMARY KEY  (`TestID`),
+
+  /*UNIQUE KEY `{0CF92969-0A44-4FD2-BA9B-B234C1` (`videoId`),
   UNIQUE KEY `videotapeId` (`videoId`),
   KEY `{21C9A279-E5B4-458A-9F10-8FCB0B` (`accountId`),
-  KEY `accountId` (`accountId`)
+  */
+
+  KEY `TestID` (`TestID`)
 ) ENGINE=InnoDB;
 
 --
 -- Dumping data for table `rental`
 --
 
-/*!40000 ALTER TABLE `rental` DISABLE KEYS */;
-INSERT INTO `rental` (`accountId`,`videoId`,`dateRented`,`dateDue`,`cost`) VALUES 
- (103,101,'2002-01-03 00:00:00','2002-01-04 00:00:00','1.5900'),
- (101,111,'2002-04-24 00:00:00','2002-05-02 00:00:00','3.9900'),
- (101,112,'2002-04-24 00:00:00','2002-04-30 00:00:00','1.9900'),
- (101,113,'2002-02-22 00:00:00','2002-02-25 00:00:00','3.0000'),
- (101,114,'2002-02-22 00:00:00','2002-02-25 00:00:00','3.0000'),
- (103,123,'2001-12-01 00:00:00','2001-12-31 00:00:00','10.9900'),
- (101,145,'2002-02-14 00:00:00','2002-02-16 00:00:00','1.9900'),
- (101,77564,'2002-04-24 00:00:00',NULL,NULL),
- (101,90987,'2002-01-01 00:00:00','2002-01-08 00:00:00','2.9900'),
- (101,99787,'2002-01-01 00:00:00','2002-01-04 00:00:00','3.4900');
-/*!40000 ALTER TABLE `rental` ENABLE KEYS */;
+/*!40000 ALTER TABLE `test` DISABLE KEYS */;
+INSERT INTO `test` (`TestID`,`TestName`) VALUES
+(909, 'Biopsy'),
+(143, 'Echocardiography'),
+(682, 'Toxicology'),
+(238, 'Angiography'),
+(350, 'Ultrasound');
 
 
---
--- Definition of table `reservation`
---
+/*!40000 ALTER TABLE `test` ENABLE KEYS */;
 
-DROP TABLE IF EXISTS `reservation`;
-CREATE TABLE `reservation` (
-  `accountId` int(10) NOT NULL,
-  `videoId` int(10) NOT NULL,
-  `dateReserved` datetime default NULL,
-  PRIMARY KEY  (`accountId`,`videoId`),
-  KEY `{1F0A2213-05D7-4F6D-A476-06DD49` (`videoId`),
-  KEY `{8A58F9C8-AF74-404E-8BD4-24E712` (`accountId`),
-  KEY `videoId` (`videoId`)
-) ENGINE=InnoDB;
-
---
--- Dumping data for table `reservation`
---
-
-/*!40000 ALTER TABLE `reservation` DISABLE KEYS */;
-INSERT INTO `reservation` (`accountId`,`videoId`,`dateReserved`) VALUES 
- (101,111,'2000-01-30 23:12:42'),
- (101,77564,'2000-01-30 23:12:41');
-/*!40000 ALTER TABLE `reservation` ENABLE KEYS */;
-
-
---
--- Definition of table `salariedemployee`
---
-
-DROP TABLE IF EXISTS `salariedemployee`;
-CREATE TABLE `salariedemployee` (
-  `ssn` varchar(50) NOT NULL,
-  `weeklyPayRate` decimal(19,4) default NULL,
-  `vacationLeaveHours` int(10) default NULL,
-  `sickLeaveHours` int(10) default NULL,
-  PRIMARY KEY  (`ssn`),
-  UNIQUE KEY `{5E1245AE-BC7F-4025-96EE-5347E3` (`ssn`)
-) ENGINE=InnoDB;
-
---
--- Dumping data for table `salariedemployee`
---
-
-/*!40000 ALTER TABLE `salariedemployee` DISABLE KEYS */;
-INSERT INTO `salariedemployee` (`ssn`,`weeklyPayRate`,`vacationLeaveHours`,`sickLeaveHours`) VALUES 
- ('145-09-0967','0.0000',0,0);
-/*!40000 ALTER TABLE `salariedemployee` ENABLE KEYS */;
-
-
---
--- Definition of table `store`
---
-
-DROP TABLE IF EXISTS `store`;
-CREATE TABLE `store` (
-  `storeId` int(10) NOT NULL,
-  `street` varchar(50) default NULL,
-  `city` varchar(50) default NULL,
-  `state` varchar(50) default NULL,
-  `zipcode` varchar(50) default NULL,
-  `manager` varchar(50) default NULL,
-  PRIMARY KEY  (`storeId`),
-  KEY `storeId` (`storeId`),
-  KEY `zipcode` (`zipcode`)
-) ENGINE=InnoDB;
-
---
--- Dumping data for table `store`
---
-
-/*!40000 ALTER TABLE `store` DISABLE KEYS */;
-INSERT INTO `store` (`storeId`,`street`,`city`,`state`,`zipcode`,`manager`) VALUES 
- (3,'2010 Liberty Rd.','Apopka','FL','34505','145-09-0967'),
- (5,'1004 N. Monroe St.','Apopka','FL','34506','588-99-0093');
-/*!40000 ALTER TABLE `store` ENABLE KEYS */;
-
-
---
--- Definition of table `supplier`
---
-
-DROP TABLE IF EXISTS `supplier`;
-CREATE TABLE `supplier` (
-  `supplierId` varchar(50) NOT NULL,
-  `name` varchar(50) default NULL,
-  `street` varchar(50) default NULL,
-  `city` varchar(50) default NULL,
-  `state` varchar(50) default NULL,
-  PRIMARY KEY  (`supplierId`),
-  KEY `SupplierId` (`supplierId`)
-) ENGINE=InnoDB;
-
---
--- Dumping data for table `supplier`
---
-
-/*!40000 ALTER TABLE `supplier` DISABLE KEYS */;
-INSERT INTO `supplier` (`supplierId`,`name`,`street`,`city`,`state`) VALUES 
- ('101101','Acme Video','101 Main','Smithfield','LA');
-/*!40000 ALTER TABLE `supplier` ENABLE KEYS */;
-
-
---
--- Definition of table `timecard`
---
-
-DROP TABLE IF EXISTS `timecard`;
-CREATE TABLE `timecard` (
-  `ssn` varchar(50) NOT NULL,
-  `date` datetime NOT NULL,
-  `startTime` datetime NOT NULL,
-  `endTime` datetime default NULL,
-  `storeId` int(10) default NULL,
-  `paid` tinyint(1) NOT NULL,
-  PRIMARY KEY  (`ssn`,`date`,`startTime`),
-  KEY `{82194334-595F-4FD7-810D-52CC8B` (`ssn`),
-  KEY `{A4F6BCBD-EDA6-4DDF-936A-3EE5B7` (`storeId`),
-  KEY `employeeId` (`ssn`),
-  KEY `storeId` (`storeId`)
-) ENGINE=InnoDB;
-
---
--- Dumping data for table `timecard`
---
-
-/*!40000 ALTER TABLE `timecard` DISABLE KEYS */;
-INSERT INTO `timecard` (`ssn`,`date`,`startTime`,`endTime`,`storeId`,`paid`) VALUES 
- ('145-09-0967','2002-01-14 00:00:00','1899-12-30 08:15:00','1899-12-30 12:00:00',3,-1),
- ('145-09-0967','2002-01-16 00:00:00','1899-12-30 08:15:00','1899-12-30 12:00:00',3,-1),
- ('245-11-4554','2002-01-14 00:00:00','1899-12-30 08:15:00','1899-12-30 12:00:00',3,-1),
- ('376-77-0099','2002-01-03 00:00:00','1899-12-30 10:00:00','1899-12-30 14:00:00',5,-1),
- ('376-77-0099','2002-01-03 00:00:00','1899-12-30 15:00:00','1899-12-30 19:00:00',3,-1),
- ('376-77-0099','2002-02-23 00:00:00','1899-12-30 14:00:00','1899-12-30 22:00:00',5,-1),
- ('376-77-0099','2002-03-21 00:00:00','1899-12-30 15:00:00','1899-12-30 19:00:00',5,-1);
-/*!40000 ALTER TABLE `timecard` ENABLE KEYS */;
-
-
---
--- Definition of table `video`
---
-
-DROP TABLE IF EXISTS `video`;
-CREATE TABLE `video` (
-  `videoId` int(10) NOT NULL,
-  `dateAcquired` datetime default NULL,
-  `movieId` int(10) default NULL,
-  `storeId` int(10) default NULL,
-  PRIMARY KEY  (`videoId`),
-  KEY `{118415F5-C661-41C1-811B-850E4A` (`storeId`),
-  KEY `{C53DE723-EA6C-444C-9BC2-4A188B` (`movieId`),
-  KEY `movieId` (`movieId`),
-  KEY `storeId` (`storeId`),
-  KEY `videotapeId` (`videoId`)
-) ENGINE=InnoDB;
-
---
--- Dumping data for table `video`
---
-
-/*!40000 ALTER TABLE `video` DISABLE KEYS */;
-INSERT INTO `video` (`videoId`,`dateAcquired`,`movieId`,`storeId`) VALUES 
- (101,'1998-01-25 00:00:00',101,3),
- (111,'1997-02-05 00:00:00',123,3),
- (112,'1995-12-31 00:00:00',123,5),
- (113,'1998-04-05 00:00:00',123,5),
- (114,'1998-04-05 00:00:00',189,5),
- (123,'1986-03-25 00:00:00',123,3),
- (145,'1995-05-12 00:00:00',145,5),
- (77564,'1991-04-29 00:00:00',189,3),
- (90987,'1999-03-25 00:00:00',450,3),
- (99787,'1997-10-10 00:00:00',987,5);
-/*!40000 ALTER TABLE `video` ENABLE KEYS */;
-
-
---
--- Definition of table `worksin`
---
-
-DROP TABLE IF EXISTS `worksin`;
-CREATE TABLE `worksin` (
-  `ssn` varchar(50) NOT NULL,
-  `storeId` int(10) NOT NULL,
-  PRIMARY KEY  (`ssn`,`storeId`),
-  KEY `{6F8AC539-9DB6-42BA-AD18-37F840` (`storeId`),
-  KEY `{BD518805-671C-4A08-B164-45A793` (`ssn`),
-  KEY `storeId` (`storeId`)
-) ENGINE=InnoDB;
-
---
--- Dumping data for table `worksin`
---
-
-/*!40000 ALTER TABLE `worksin` DISABLE KEYS */;
-INSERT INTO `worksin` (`ssn`,`storeId`) VALUES 
- ('145-09-0967',3),
- ('245-11-4554',3),
- ('145-09-0967',5),
- ('245-11-4554',5),
- ('376-77-0099',5);
-/*!40000 ALTER TABLE `worksin` ENABLE KEYS */;
 
 
 
