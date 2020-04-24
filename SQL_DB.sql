@@ -9,14 +9,14 @@ USE DocOffice;
 DROP TABLE IF EXISTS `person`;
 CREATE TABLE `person` (
   `PersonID` int(10) NOT NULL,
-  `LastName` varchar(50) default NULL,
-  `FirstName` varchar(50) default NULL,
-  `StreetAddress` varchar(50) default NULL,
-  `city` varchar(50) default NULL,
-  `state` varchar(2) default NULL,
-  `zip` varchar(9) default NULL,
-  `PhoneNumber` varchar(10) default NULL,
-  `SSN` varchar(10) default NULL,
+  `LastName` varchar(50) NOT NULL,
+  `FirstName` varchar(50) NOT NULL,
+  `StreetAddress` varchar(50) NOT NULL,
+  `city` varchar(50) NOT NULL,
+  `state` varchar(2) NOT NULL,
+  `zip` varchar(9) NOT NULL,
+  `PhoneNumber` varchar(10) NOT NULL,
+  `SSN` varchar(10) NOT NULL,
 
 /* ---------------------------------------- */
   PRIMARY KEY  (`PersonID`),
@@ -29,17 +29,17 @@ CREATE TABLE `person` (
 --
 
 /*!40000 ALTER TABLE `person` DISABLE KEYS */;
-INSERT INTO `person` (`PersonID`,`LastName`,`FirstName`,`StreetAddress`,`city`,`state`,`zip`,`PhoneNumber`, 'SSN') VALUES
-111,'Apple','Amanda','345 Randolph Circle','Apopka','CA','30458','7141147258',’111222333’),
-(222,'Berry','Beatrice','3230 Dade St.','Dade City','FL','30555','3.4700',’7141852963’,’222333444’),
-(333,'Celery','Cecilia','103 Landis Hall','Bratt','CA','30457','7141123456’,’333444555’'),
-(444,'Duck','Donald','76 Main St.','Apopka','CA','30458','7141456789',’444555666’),
-(555,'Eggs','Erin','9501 Lafayette St.','Houma','CA','44099','7147894563',’555666777’),
-(666,'Fajita','Fabian','123 Main St.','Apopka','CA','30458','7141334679',’666777888’),
-(777,'Garden','Gail','14325 N. Bankside St.','Godfrey','CA','43580','7142225579',’777888999’),
-(888,'Ham','Holly','Cawthon Dorm, room 642','Tallahassee','FL','32306','7145554499’,'888999000’),
-(999,'Ice','Izzy','101 Thanet St.','London','CA','33333','7147779456',’123456789’),
-(101,'Jam','Joseph','101 Thanet St.','London','CA','33333','7143334169',’987654321’);
+INSERT INTO `person` (`PersonID`,`LastName`,`FirstName`,`StreetAddress`,`city`,`state`,`zip`,`PhoneNumber`, `SSN`) VALUES
+(111,'Apple','Amanda','345 Randolph Circle','ApopkpersonPersonIDpersona','CA','30458','7141147258','111222333'),
+(222,'Berry','Beatrice','3230 Dade St.','Dade City','FL','30555','7141852963','222333444'),
+(333,'Celery','Cecilia','103 Landis Hall','Bratt','CA','30457','7141123456','333444555'),
+(444,'Duck','Donald','76 Main St.','Apopka','CA','30458','7141456789','444555666'),
+(555,'Eggs','Erin','9501 Lafayette St.','Houma','CA','44099','7147894563','555666777'),
+(666,'Fajita','Fabian','123 Main St.','Apopka','CA','30458','7141334679','666777888'),
+(777,'Garden','Gail','14325 N. Bankside St.','Godfrey','CA','43580','7142225579','777888999'),
+(888,'Ham','Holly','Cawthon Dorm, room 642','Tallahassee','CA','32306','7145554499','888999000'),
+(999,'Ice','Izzy','101 Thanet St.','London','CA','33333','7147779456','123456789'),
+(101,'Jam','Joseph','101 Thanet St.','London','CA','33333','7143334169','987654321');
 
 
 /*!40000 ALTER TABLE `person` ENABLE KEYS */;
@@ -52,13 +52,13 @@ INSERT INTO `person` (`PersonID`,`LastName`,`FirstName`,`StreetAddress`,`city`,`
 DROP TABLE IF EXISTS `patient`;
 CREATE TABLE `patient` (
   `PatientID` int(10) NOT NULL,
-  `PhoneNumber` varchar(50) default NULL,
-  `DOB` date() default NULL,
+  `PhoneNumber` varchar(50) NOT NULL,
+  `DOB` date NOT NULL,
   `PersonID` int(10) NOT NULL,
 
-  PRIMARY KEY  (`PatientID`)
-  KEY `PhoneNumber` (`PhoneNumber`)
-  KEY `PersonID` (`PersonID`)
+  PRIMARY KEY  (`PatientID`),
+  KEY `PhoneNumber` (`PhoneNumber`),
+  KEY `PersonID` (`PersonID`),
   KEY `PatientID` (`PatientID`)
 
 
@@ -76,7 +76,7 @@ INSERT INTO `patient` (`PatientID`,`PhoneNumber`,`DOB`,`PersonID`) VALUES
 (114,'7143334169','06-06-1997',101),
 (115,'7145554499','02-29-1990',888);
 
-/*!40000 ALTER TABLE `employee` ENABLE KEYS */;
+/*!40000 ALTER TABLE `patient` ENABLE KEYS */;
 
 
 --
@@ -86,11 +86,11 @@ INSERT INTO `patient` (`PatientID`,`PhoneNumber`,`DOB`,`PersonID`) VALUES
 DROP TABLE IF EXISTS `doctor`;
 CREATE TABLE `doctor` (
   `DoctorID` int(10) NOT NULL,
-  `MedicalDegrees` varchar(60) default NULL,
-  `PersonID` int(10) default NOT NULL,
+  `MedicalDegrees` varchar(60) NOT NULL,
+  `PersonID` int(10) NOT NULL,
 
   PRIMARY KEY  (`DoctorID`),
-  KEY `DoctorID` (`DoctorID`)
+  KEY `DoctorID` (`DoctorID`),
   KEY `PersonID` (`PersonID`)
 
   /*UNIQUE KEY `{CC921662-F1CE-40BD-B451-CD5052` (`ssn`)*/
@@ -118,11 +118,11 @@ CREATE TABLE `patientVisit` (
   `VisitID` int(10) NOT NULL,
   `PatientID` int(10) NOT NULL,
   `DoctorID` int(10) NOT NULL,
-  `VisitDate` int(10) default NULL,
-  `DocNote` text(50) default NULL,
+  `VisitDate` int(10) NOT NULL,
+  `DocNote` text(50) NOT NULL,
 
   PRIMARY KEY  (`VisitID`),
-  KEY `PatientID` (`PatientID`)
+  KEY `PatientID` (`PatientID`),
   KEY `DoctorID` (`DoctorID`)
 ) ENGINE=InnoDB;
 
@@ -138,7 +138,7 @@ INSERT INTO `patientVisit` (`VisitID`,`PatientID`,`DoctorID`,`VisitDate`,`DocNot
 (444, 114, 204, '01-31-2020', 'Stay in the hospital for another week'),
 (555, 115, 206, '03-15-2020', 'Drink pills every 6 hours');
 
-/*!40000 ALTER TABLE `movie` ENABLE KEYS */;
+/*!40000 ALTER TABLE `patientVisit` ENABLE KEYS */;
 
 
 --
@@ -162,13 +162,13 @@ CREATE TABLE `speciality` (
 -- Dumping data for table `otherusers`
 --
 
-/*!40000 ALTER TABLE `Speciality` DISABLE KEYS */;
+/*!40000 ALTER TABLE `speciality` DISABLE KEYS */;
 INSERT INTO `speciality` (`SpecialityID`,`SpecialityName`) VALUES
 (234, 'Diagnostic Imaging'),
 (509, 'Physical and Visual Examination' ),
 (576, 'Cellular & Chemical Analysis');
 
-/*!40000 ALTER TABLE `otherusers` ENABLE KEYS */;
+/*!40000 ALTER TABLE `speciality` ENABLE KEYS */;
 
 
 --
@@ -182,19 +182,19 @@ CREATE TABLE `doctorSpeciality` (
 
   PRIMARY KEY  (`DoctorID`,`SpecialityID`),
   KEY `DoctorID` (`DoctorID`),
-  KEY `SpecialityID` (`SpecialityID`),
+  KEY `SpecialityID` (`SpecialityID`)
   ) ENGINE=InnoDB;
 
 --
 -- Dumping data for table `doctorSpeciality`
 --
 
-/*!40000 ALTER TABLE `DoctorSpeciality` DISABLE KEYS */;
+/*!40000 ALTER TABLE `doctorSpeciality` DISABLE KEYS */;
 INSERT INTO `doctorSpeciality` (`DoctorID`,`SpecialityID`) VALUES
 (202, 234),
 (204, 509),
 (206, 576);
-/*!40000 ALTER TABLE `paystatement` ENABLE KEYS */;
+/*!40000 ALTER TABLE `doctorSpeciality` ENABLE KEYS */;
 
 
 --
@@ -227,7 +227,7 @@ INSERT INTO `PVisitPrescription` (`VisitID`,`PrescriptionID`) VALUES
 (456, 904),
 (567, 905);
 
-/*!40000 ALTER TABLE `previousrental` ENABLE KEYS */;
+/*!40000 ALTER TABLE `PVisitPrescription` ENABLE KEYS */;
 
 
 --
@@ -237,11 +237,11 @@ INSERT INTO `PVisitPrescription` (`VisitID`,`PrescriptionID`) VALUES
 DROP TABLE IF EXISTS `prescription`;
 CREATE TABLE `prescription` (
   `PrescriptionID` int(10) NOT NULL,
-  `PrescriptionName` varchar(50) default NULL,
+  `PrescriptionName` varchar(50) NOT NULL,
 
   PRIMARY KEY  (`PrescriptionID`),
   /*KEY `{B2E00A44-11D2-446B-8500-570CDC` (`supplierId`), */
-  KEY `PrescriptionID` (`PrescriptionID`),
+  KEY `PrescriptionID` (`PrescriptionID`)
 
 ) ENGINE=InnoDB;
 
@@ -257,7 +257,7 @@ INSERT INTO `prescription` (`PrescriptionID`,`PrescriptionName`) VALUES
 (904, 'Ciprofloxacin'),
 (905, 'Lyrica');
 
-/*!40000 ALTER TABLE `purchaseorder` ENABLE KEYS */;
+/*!40000 ALTER TABLE `prescription` ENABLE KEYS */;
 
 
 --
@@ -282,8 +282,12 @@ CREATE TABLE `PVisitTest` (
 
 /*!40000 ALTER TABLE `PVisitTest` DISABLE KEYS */;
 INSERT INTO `PVisitTest` (`VisitID`,`TestID`) VALUES
- (99001,450,3,'25.0000'),
- (99001,987,1,'25.0000');
+(123, 909),
+(234, 682),
+(345, 350),
+(456, 238),
+(567, 143);
+
 /*!40000 ALTER TABLE `PVisitTest` ENABLE KEYS */;
 
 
@@ -293,7 +297,7 @@ INSERT INTO `PVisitTest` (`VisitID`,`TestID`) VALUES
 
 DROP TABLE IF EXISTS `test`;
 CREATE TABLE `test` (
-  `TestID` int(10) default NULL,
+  `TestID` int(10) NOT NULL,
   `TestName` varchar(10) NOT NULL,
 
   PRIMARY KEY  (`TestID`),
@@ -320,15 +324,3 @@ INSERT INTO `test` (`TestID`,`TestName`) VALUES
 
 
 /*!40000 ALTER TABLE `test` ENABLE KEYS */;
-
-
-
-
-
--- /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
