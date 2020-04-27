@@ -1,1 +1,11 @@
-
+-- Roberts Patients --
+Create View RobertsPatients AS
+SELECT FirstName, LastName, PhoneNumber
+FROM person
+WHERE person.personID IN (SELECT p.PersonID
+					FROM patient p, patientvisit pv
+					WHERE p.PatientId = pv.PatientID
+					AND pv.doctorID = (SELECT d.doctorID
+									   FROM doctor d, person p
+								       WHERE p.PersonID = d.PersonID
+								       AND p.FirstName = 'Robert' AND p.LastName = 'Stevens'));
