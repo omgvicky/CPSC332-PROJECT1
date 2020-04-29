@@ -1,13 +1,1 @@
 
-CREATE VIEW DoctorsWithSpecialties AS
-SELECT person.FirstName, person.LastName, speciality.SpecialityName
-
-FROM person
-JOIN doctor
-ON person.PersonID = doctor.PersonID
-
-JOIN doctorSpeciality
-ON doctorSpeciality.DoctorID = doctor.DoctorID
-
-JOIN speciality
-ON speciality.SpecialityID = doctorSpeciality.SpecialityID
