@@ -103,9 +103,9 @@ CREATE TABLE `doctor` (
 
 /*!40000 ALTER TABLE `doctor` DISABLE KEYS */;
 INSERT INTO `doctor` (`DoctorID`,`MedicalDegrees`,`PersonID`) VALUES
-('CC1000', 'M.D.' , 333),
-('DD1001', 'M.D.', 444),
-('RS1002', 'M.D.', 102);
+('CE1000', 'M.D.' , 333),
+('DO1001', 'M.D.', 444),
+('RO1002', 'M.D.', 102);
 
 /*!40000 ALTER TABLE `doctor` ENABLE KEYS */;
 
@@ -133,10 +133,10 @@ CREATE TABLE `patientVisit` (
 
 /*!40000 ALTER TABLE `patientVisit` DISABLE KEYS */;
 INSERT INTO `patientVisit` (`VisitID`,`PatientID`,`DoctorID`,`VisitDate`,`DocNote`) VALUES
-(111, 101, 'RS1002', '04-24-2020', 'Drink pills every 12 hours'),
-(222, 102, 'RS1002', '04-23-2020', 'We try our best…' ),
-(333, 103, 'DD1001', '02-25-2019', 'Please excuse him from school'),
-(444, 555, 'CC1000', '03-11-2019', 'Drink pills every 6 hours');
+(111, 101, 'RO1002', '04-24-2020', 'Drink pills every 12 hours'),
+(222, 102, 'RO1002', '04-23-2020', 'We try our best…' ),
+(333, 103, 'DO1001', '02-25-2019', 'Please excuse him from school'),
+(444, 555, 'CE1000', '03-11-2019', 'Drink pills every 6 hours');
 
 /*!40000 ALTER TABLE `patientVisit` ENABLE KEYS */;
 
@@ -191,9 +191,10 @@ CREATE TABLE `doctorSpeciality` (
 
 /*!40000 ALTER TABLE `doctorSpeciality` DISABLE KEYS */;
 INSERT INTO `doctorSpeciality` (`DoctorID`,`SpecialityID`) VALUES
-('CC1000', 234),
-('DD1001', 509),
-('RS1002', 576);
+('CE1000', 234),
+('DO1001', 509),
+('RO1002', 576);
+
 /*!40000 ALTER TABLE `doctorSpeciality` ENABLE KEYS */;
 
 
