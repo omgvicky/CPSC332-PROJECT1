@@ -1,10 +1,10 @@
 -- Doctors who gave out prescriptions of Vicodin --
-CREATE VIEW VicoDoctors AS 
-SELECT p.FirstName, p.LastName 
-FROM person p, doctor d 
-WHERE d.DoctorID= (SELECT pv.DoctorID
-		        FROM patientVisit pv
-		       WHERE pv.VisitID IN (SELECT v.VisitID
-		       			FROM PVisitPrescription v, prescription s
-					      WHERE v.PrescriptionID = s.PrescriptionID 
-                AND s.PrescriptionName = "Vicodin"));
+
+CREATE VIEW DoctorsGiveVicodin AS
+SELECT p.FirstName, p.LastName
+FROM doctor d, person p
+WHERE p.PersonID = d.PersonId AND d.DoctorID IN (SELECT pv.DoctorID
+						FROM patientVisit pv
+						WHERE pv.VisitID IN (SELECT pvp.VisitID
+									FROM PVisitPrescription pvp, prescription s
+									WHERE pvp.PrescriptionID = s.PrescriptionID AND s.PrescriptionName = 'Vicodin'));
