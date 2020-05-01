@@ -40,7 +40,9 @@ INSERT INTO `person` (`PersonID`,`LastName`,`FirstName`,`StreetAddress`,`city`,`
 (888,'Ham','Holly','Cawthon Dorm, room 642','Tallahassee','CA','32306','7145554499','888999000'),
 (999,'Ice','Izzy','101 Thanet St.','London','CA','33333','7147779456','123456789'),
 (101,'Jam','Joseph','101 Thanet St.','London','CA','33333','7143334169','987654321'),
-(102,'Stevens','Robert','1392 Maryland St.','Fullerton','CA','92730','657159357','111999777');
+(102,'Stevens','Robert','1392 Maryland St.','Fullerton','CA','92730','657159357','111999777'),
+(103,'Nguyen','Mike','15795 Main St.','Garden Grove','CA','92481','657133799','111555999'),
+(104,'Lopez','Alisa','14732 Bay Lane','La Puente','CA','91744','849257369','222555888');
 
 
 /*!40000 ALTER TABLE `person` ENABLE KEYS */;
@@ -105,7 +107,9 @@ CREATE TABLE `doctor` (
 INSERT INTO `doctor` (`DoctorID`,`MedicalDegrees`,`PersonID`) VALUES
 ('CE1000', 'M.D.' , 333),
 ('DO1001', 'M.D.', 444),
-('RO1002', 'M.D.', 102);
+('RO1002', 'M.D.', 102),
+('MI1003', 'M.D.', 103),
+('AL1004', 'M.D.', 104);
 
 /*!40000 ALTER TABLE `doctor` ENABLE KEYS */;
 
@@ -178,7 +182,7 @@ INSERT INTO `speciality` (`SpecialityID`,`SpecialityName`) VALUES
 DROP TABLE IF EXISTS `doctorSpeciality`;
 CREATE TABLE `doctorSpeciality` (
   `DoctorID` varchar(10) NOT NULL,
-  `SpecialityID` int(10) NOT NULL,
+  `SpecialityID` int(10) NULL,
 
   PRIMARY KEY  (`DoctorID`,`SpecialityID`),
   KEY `DoctorID` (`DoctorID`),
@@ -193,7 +197,9 @@ CREATE TABLE `doctorSpeciality` (
 INSERT INTO `doctorSpeciality` (`DoctorID`,`SpecialityID`) VALUES
 ('CE1000', 234),
 ('DO1001', 509),
-('RO1002', 576);
+('RO1002', 576),
+('MI1003', NULL),
+('AL1004', NULL);
 
 /*!40000 ALTER TABLE `doctorSpeciality` ENABLE KEYS */;
 
