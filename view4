@@ -1,1 +1,15 @@
+-------- Modified view 3 to show both doctors with specialty and doctors with no specialty --------
 
+DROP VIEW IF EXISTS DoctorsWithSpecialties;
+CREATE VIEW DoctorsWithSpecialties AS
+SELECT person.FirstName, person.LastName, speciality.SpecialityName
+
+FROM person
+JOIN doctor
+ON person.PersonID = doctor.PersonID
+
+JOIN doctorSpeciality
+ON doctorSpeciality.DoctorID = doctor.DoctorID
+
+LEFT JOIN speciality
+ON speciality.SpecialityID = doctorSpeciality.SpecialityID;
