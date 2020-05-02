@@ -73,11 +73,11 @@ CREATE TABLE `patient` (
 
 /*!40000 ALTER TABLE `patient` DISABLE KEYS */;
 INSERT INTO `patient` (`PatientID`,`PhoneNumber`,`DOB`,`PersonID`) VALUES
-(101,'7141147258','05-03-1992',111),
-(102,'7141852963','01-12-1990',222),
-(103,'7147894563','12-24-1985',555),
-(114,'7143334169','06-06-1997',101),
-(115,'7145554499','02-29-1990',888);
+(101,'7141147258','1992-05-03',111),
+(102,'7141852963','1990-01-12',222),
+(103,'7147894563','1985-12-24',555),
+(114,'7143334169','1997-06-06',101),
+(115,'7145554499','1990-02-29',888);
 
 /*!40000 ALTER TABLE `patient` ENABLE KEYS */;
 
@@ -137,10 +137,10 @@ CREATE TABLE `patientVisit` (
 
 /*!40000 ALTER TABLE `patientVisit` DISABLE KEYS */;
 INSERT INTO `patientVisit` (`VisitID`,`PatientID`,`DoctorID`,`VisitDate`,`DocNote`) VALUES
-(111, 101, 'RO1002', '04-24-2020', 'Drink pills every 12 hours'),
-(222, 102, 'RO1002', '04-23-2020', 'We try our best…' ),
-(333, 103, 'DO1001', '02-25-2019', 'Please excuse him from school'),
-(444, 555, 'CE1000', '03-11-2019', 'Drink pills every 6 hours');
+(111, 101, 'RO1002', '2020-04-24', 'Drink pills every 12 hours'),
+(222, 102, 'RO1002', '2020-04-23', 'We try our best…' ),
+(333, 103, 'DO1001', '2019-02-25', 'Please excuse him from school'),
+(444, 555, 'CE1000', '2019-03-11', 'Drink pills every 6 hours');
 
 /*!40000 ALTER TABLE `patientVisit` ENABLE KEYS */;
 
