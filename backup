@@ -1,1 +1,41 @@
+CREATE DATABASE IF NOT EXISTS DocOffice_backup;
 
+DROP TABLE IF EXISTS person2;
+CREATE TABLE person2 LIKE DocOffice.person;
+INSERT INTO person2 (SELECT * from DocOffice.person);
+
+DROP TABLE IF EXISTS patient2;
+CREATE TABLE patient2 LIKE DocOffice.patient;
+INSERT INTO patient2 (SELECT * from DocOffice.patient);
+
+DROP TABLE IF EXISTS doctor2;
+CREATE TABLE doctor2 LIKE DocOffice.doctor;
+INSERT INTO doctor2 (SELECT * FROM DocOffice.doctor);
+
+DROP TABLE IF EXISTS patientVisit2;
+CREATE TABLE patientVisit2 LIKE DocOffice.patientVisit;
+INSERT INTO patientVisit2 (SELECT * FROM DocOffice.patientVisit);
+
+DROP TABLE IF EXISTS speciality2;
+CREATE TABLE speciality2 LIKE DocOffice.speciality;
+INSERT INTO speciality2 (SELECT * FROM DocOffice.speciality);
+
+DROP TABLE IF EXISTS doctorSpeciality2;
+CREATE TABLE doctorSpeciality2 LIKE DocOffice.doctorSpeciality;
+INSERT INTO doctorSpeciality2 (SELECT * FROM DocOffice.doctorSpeciality);
+
+DROP TABLE IF EXISTS PVisitPrescription2;
+CREATE TABLE PVisitPrescription2 LIKE DocOffice.PVisitPrescription;
+INSERT INTO PVisitPrescription2 (SELECT * FROM DocOffice.PVisitPrescription);
+
+DROP TABLE IF EXISTS prescription2;
+CREATE TABLE prescription2 LIKE DocOffice.prescription;
+INSERT INTO prescription2 (SELECT * FROM DocOffice.prescription);
+
+DROP TABLE IF EXISTS PVisitTest2;
+CREATE TABLE PVisitTest2 LIKE DocOffice.PVisitTest;
+INSERT INTO PVisitTest2 (SELECT * FROM DocOffice.PVisitTest);
+
+DROP TABLE IF EXISTS test2;
+CREATE TABLE test2 LIKE DocOffice.test;
+INSERT INTO test2 (SELECT * FROM DocOffice.test);
