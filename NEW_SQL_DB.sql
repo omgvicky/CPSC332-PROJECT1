@@ -184,7 +184,6 @@ CREATE TABLE `doctorSpeciality` (
   `DoctorID` varchar(10) NOT NULL,
   `SpecialityID` int(10) NULL,
 
-  PRIMARY KEY  (`DoctorID`,`SpecialityID`),
   KEY `DoctorID` (`DoctorID`),
   KEY `SpecialityID` (`SpecialityID`)
   ) ENGINE=InnoDB;
@@ -329,3 +328,11 @@ INSERT INTO `test` (`TestID`,`TestName`) VALUES
 
 
 /*!40000 ALTER TABLE `test` ENABLE KEYS */;
+
+DROP TABLE IF EXISTS `audit`;
+CREATE TABLE `audit` (
+	`DoctorFirstName` varchar(20) NOT NULL,
+    `actionOfNewData` varchar (10) NOT NULL,
+    `Specialty` varchar(20) NOT NULL,
+    `ModDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB;
