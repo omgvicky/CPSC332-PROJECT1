@@ -81,7 +81,7 @@
 	<h2> About this Website</h2>
 	<!--THICK LINE -->
 <div class="thick-line"> </div>
- <p> This project is by Kyden Au, Dalisa Ngyuen, and Victoria Tran in CPSC 332-02</p>
+ <p> This project is by Kyden Au, Dalisa Nguyen, and Victoria Tran in CPSC 332-02</p>
 </div>
 
 
