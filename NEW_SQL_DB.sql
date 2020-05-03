@@ -333,6 +333,6 @@ DROP TABLE IF EXISTS `audit`;
 CREATE TABLE `audit` (
     `DoctorFirstName` varchar(20) NOT NULL,
     `actionOfNewData` varchar (10) NOT NULL,
-    `Specialty` varchar(20) NOT NULL,
+    `Specialty` varchar(50) NOT NULL,
     `ModDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB;
