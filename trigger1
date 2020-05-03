@@ -1,1 +1,17 @@
-
+DROP TRIGGER IF EXISTS addDoctorSpecialty;
+CREATE TRIGGER addDoctorSpecialty
+AFTER INSERT ON doctorSpeciality
+FOR EACH ROW
+	INSERT INTO audit (DoctorFirstName, actionOfNewData , Specialty)
+    SELECT DISTINCT p.FirstName, 'ADDED', s.SpecialityName
+	FROM person p, speciality s, doctor d, doctorSpeciality ds
+    WHERE p.PersonID = d.PersonID AND d.DoctorID = NEW.DoctorID AND s.SpecialityID = NEW.SpecialityID;
+    
+DROP TRIGGER IF EXISTS updateDoctorSpecialty;
+CREATE TRIGGER updateDoctorSpecialty
+AFTER UPDATE ON doctorSpeciality
+FOR EACH ROW
+	INSERT INTO audit (DoctorFirstName, actionOfNewData , Specialty)
+    SELECT DISTINCT p.FirstName, 'UPDATED', s.SpecialityName
+	FROM person p, speciality s, doctor d, doctorSpeciality ds
+    WHERE p.PersonID = d.PersonID AND d.DoctorID = NEW.DoctorID AND s.SpecialityID = NEW.SpecialityID;
