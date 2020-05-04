@@ -34,6 +34,49 @@
 </div>
 	<p> Note: This page combines snapshots for both the trigger creation/run and snapshots for the backup creation/run</p>
 
+<!--TRIGGER -->
+<div class="screenshots">
+	<h1> Trigger</h1>
+
+	<h2> Creation </h2>
+	<h3> SQL Code </h3>
+	<img src="imgs/triggerCreation.png"> </img>
+	<h3> Snapshot of Triggers on Phpmyadmin </h3>
+	<img src="imgs/trigCreation2.png"> </img>
+
+	<h2> Successful Run </h2>
+	<img src="imgs/trigRun.png"> </img>
+	<img src="imgs/trigCreation2.png"> </img>
+
+	<h2> Successful Entry </h2>
+	<h3> Before UPDATE </h3>
+	<img src="imgs/trigBeforeUpdate.png"> </img>
+	<h3> After UPDATE </h3>
+	<img src="imgs/trigAfterUpdate.png"> </img>
+	<h3> SQL Code </h3>
+	<img src="imgs/trigUpdatesql.png"> </img>
+	<h3> Before INSERT </h3>
+	<img src="imgs/trigBeforeInsert.png"> </img>
+	<h3> After INSERT </h3>
+	<img src="imgs/trigAfterInsert.png"> </img>
+	<h3> SQL Code </h3>
+	<img src="imgs/trigInsertsql.png"> </img>
+
+	<h3> Audit Table </h3>
+	<img src="imgs/auditTable.png"> </img>
+
+
+	<h1> Backup </h1>
+	<h2> Creation </h2>
+	<h3> SQL Code </h3>
+	<img src="imgs/backUpSql.png"> </img>
+	<h2> Successful Run </h2>
+	<h3> Snapshot of Backup </h3>
+	<img src="imgs/backUp.png"> </img>
+
+
+</div>
+
 </body>
 
 </html>
