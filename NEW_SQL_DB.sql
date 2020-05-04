@@ -336,3 +336,118 @@ CREATE TABLE `audit` (
     `Specialty` varchar(50) NOT NULL,
     `ModDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB;
+
+
+
+/* VIEW 1 */
+Create View RobertsPatients AS
+SELECT person.FirstName, person.LastName, person.PhoneNumber
+FROM person
+JOIN patient
+ON person.PersonID= patient.PersonID
+JOIN patientVisit
+ON patient.PatientID = patientVisit.PatientID AND patientVisit.DoctorID = 'RO1002';
+
+
+/* VIEW 2 */
+CREATE VIEW DoctorsGiveVicodin AS
+SELECT p.FirstName, p.LastName
+FROM doctor d, person p
+WHERE p.PersonID = d.PersonId AND d.DoctorID IN (SELECT pv.DoctorID
+						FROM patientVisit pv
+						WHERE pv.VisitID IN (SELECT pvp.VisitID
+									FROM PVisitPrescription pvp, prescription s
+									WHERE pvp.PrescriptionID = s.PrescriptionID AND s.PrescriptionName = 'Vicodin'));
+
+
+/* VIEW 3 */
+CREATE VIEW DoctorsWithSpecialties AS
+SELECT person.FirstName, person.LastName, speciality.SpecialityName
+FROM person
+JOIN doctor
+ON person.PersonID = doctor.PersonID
+JOIN doctorSpeciality
+ON doctorSpeciality.DoctorID = doctor.DoctorID
+JOIN speciality
+ON speciality.SpecialityID = doctorSpeciality.SpecialityID;
+
+
+
+/* VIEW 4 */
+DROP VIEW IF EXISTS DoctorsWithSpecialties;
+CREATE VIEW DoctorsWithSpecialties AS
+SELECT person.FirstName, person.LastName, speciality.SpecialityName
+
+FROM person
+JOIN doctor
+ON person.PersonID = doctor.PersonID
+
+JOIN doctorSpeciality
+ON doctorSpeciality.DoctorID = doctor.DoctorID
+
+LEFT JOIN speciality
+ON speciality.SpecialityID = doctorSpeciality.SpecialityID;
+
+
+/* TRIGGER */
+DROP TRIGGER IF EXISTS addDoctorSpecialty;
+CREATE TRIGGER addDoctorSpecialty
+AFTER INSERT ON doctorSpeciality
+FOR EACH ROW
+	INSERT INTO audit (DoctorFirstName, actionOfNewData , Specialty)
+   	SELECT DISTINCT p.FirstName, 'ADDED', s.SpecialityName
+	FROM person p, speciality s, doctor d, doctorSpeciality ds
+    	WHERE p.PersonID = d.PersonID AND d.DoctorID = NEW.DoctorID AND s.SpecialityID = NEW.SpecialityID;
+
+DROP TRIGGER IF EXISTS updateDoctorSpecialty;
+CREATE TRIGGER updateDoctorSpecialty
+AFTER UPDATE ON doctorSpeciality
+FOR EACH ROW
+	INSERT INTO audit (DoctorFirstName, actionOfNewData , Specialty)
+    	SELECT DISTINCT p.FirstName, 'UPDATED', s.SpecialityName
+	FROM person p, speciality s, doctor d, doctorSpeciality ds
+    	WHERE p.PersonID = d.PersonID AND d.DoctorID = NEW.DoctorID AND s.SpecialityID = NEW.SpecialityID;
+
+/* BACKUP */
+
+CREATE DATABASE IF NOT EXISTS DocOffice_backup;
+USE DocOffice_backup;
+DROP TABLE IF EXISTS person2;
+CREATE TABLE person2 LIKE DocOffice.person;
+INSERT INTO person2 (SELECT * from DocOffice.person);
+
+DROP TABLE IF EXISTS patient2;
+CREATE TABLE patient2 LIKE DocOffice.patient;
+INSERT INTO patient2 (SELECT * from DocOffice.patient);
+
+DROP TABLE IF EXISTS doctor2;
+CREATE TABLE doctor2 LIKE DocOffice.doctor;
+INSERT INTO doctor2 (SELECT * FROM DocOffice.doctor);
+
+DROP TABLE IF EXISTS patientVisit2;
+CREATE TABLE patientVisit2 LIKE DocOffice.patientVisit;
+INSERT INTO patientVisit2 (SELECT * FROM DocOffice.patientVisit);
+
+DROP TABLE IF EXISTS speciality2;
+CREATE TABLE speciality2 LIKE DocOffice.speciality;
+INSERT INTO speciality2 (SELECT * FROM DocOffice.speciality);
+
+DROP TABLE IF EXISTS doctorSpeciality2;
+CREATE TABLE doctorSpeciality2 LIKE DocOffice.doctorSpeciality;
+INSERT INTO doctorSpeciality2 (SELECT * FROM DocOffice.doctorSpeciality);
+
+DROP TABLE IF EXISTS PVisitPrescription2;
+CREATE TABLE PVisitPrescription2 LIKE DocOffice.PVisitPrescription;
+INSERT INTO PVisitPrescription2 (SELECT * FROM DocOffice.PVisitPrescription);
+
+DROP TABLE IF EXISTS prescription2;
+CREATE TABLE prescription2 LIKE DocOffice.prescription;
+INSERT INTO prescription2 (SELECT * FROM DocOffice.prescription);
+
+DROP TABLE IF EXISTS PVisitTest2;
+CREATE TABLE PVisitTest2 LIKE DocOffice.PVisitTest;
+INSERT INTO PVisitTest2 (SELECT * FROM DocOffice.PVisitTest);
+
+DROP TABLE IF EXISTS test2;
+CREATE TABLE test2 LIKE DocOffice.test;
+INSERT INTO test2 (SELECT * FROM DocOffice.test);
